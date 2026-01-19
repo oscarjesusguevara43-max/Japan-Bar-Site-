@@ -24,7 +24,7 @@ export default function Gallery() {
     <section id="gallery" className="py-24 bg-card/50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <span className="text-secondary font-cinzel tracking-widest text-sm">GALERÍA</span>
+          <span className="text-secondary font-cinzel tracking-widest text-sm uppercase">Galería</span>
           <h2 className="text-4xl md:text-5xl font-cinzel text-white">La Experiencia Visual</h2>
         </div>
 
@@ -38,13 +38,19 @@ export default function Gallery() {
               transition={{ delay: idx * 0.1 }}
               viewport={{ once: true }}
               onClick={() => setSelectedImage(img.src)}
+              data-testid={`gallery-item-${idx}`}
             >
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all duration-500 z-10" />
+              {/* Added a subtle overlay that lightens on hover instead of just darkening */}
+              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-20 transition-all duration-500 z-10 pointer-events-none" />
+              
               <img 
                 src={img.src} 
                 alt={img.alt} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-110 contrast-105"
               />
+              
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-300 z-0" />
+              
               <div className="absolute bottom-4 left-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white font-cinzel text-sm bg-black/50 px-3 py-1 backdrop-blur-sm border border-white/10">
                   {img.alt}
@@ -56,10 +62,11 @@ export default function Gallery() {
       </div>
 
       {selectedImage && (
-        <div className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
           <button 
-            className="absolute top-6 right-6 text-white/70 hover:text-white"
-            onClick={() => setSelectedImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white z-[70]"
+            onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+            data-testid="button-close-gallery"
           >
             <X size={40} />
           </button>
@@ -68,7 +75,8 @@ export default function Gallery() {
             animate={{ opacity: 1, scale: 1 }}
             src={selectedImage}
             alt="Fullscreen view"
-            className="max-w-full max-h-[90vh] object-contain border border-white/10 shadow-2xl"
+            className="max-w-full max-h-[90vh] object-contain border border-white/10 shadow-2xl brightness-110"
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
