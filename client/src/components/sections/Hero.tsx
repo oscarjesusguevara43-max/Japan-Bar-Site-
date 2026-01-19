@@ -1,6 +1,7 @@
-import heroBg from "@assets/Screenshot_20260118-174214_(1)_1768847313856.jpg";
+import heroBg from "@assets/Screenshot_20260118-174214_(1)_1768847794315.jpg";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 
 export default function Hero() {
   const scrollTo = (id: string) => {
@@ -8,6 +9,10 @@ export default function Hero() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const openWhatsApp = () => {
+    window.open("https://wa.me/14383805658", "_blank");
   };
 
   return (
@@ -60,6 +65,21 @@ export default function Hero() {
               VER CARTA
             </Button>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="pt-4"
+          >
+            <Button
+              onClick={openWhatsApp}
+              className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-6 py-6 font-medium shadow-lg transition-transform hover:scale-105"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              WhatsApp
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
 
