@@ -10,23 +10,33 @@ import { Star } from "lucide-react";
 
 const reviews = [
   {
-    name: "Sophie L.",
-    text: "Absolutamente mágico. La atmósfera te transporta directamente a un callejón de Ginza. El Tokyo Old Fashioned es una obra de arte.",
+    name: "Sonia Sethi",
+    text: "Big in Japan es una joya escondida en el corazón de Montreal. Desde el momento en que entras, te transportas a un mundo completamente diferente: iluminación tenue, velas por todas partes, cabinas acogedoras y un ambiente de bar clandestino relajado y moderno.",
     rating: 5
   },
   {
-    name: "Marc-André D.",
-    text: "El secreto mejor guardado de Saint-Laurent. Íntimo, oscuro y con un servicio impecable. Perfecto para impresionar en una cita.",
+    name: "Mulan_314",
+    text: "Un lugar discreto y acogedor, una joya escondida. Idea perfecta para una cita. Sin duda volvería. Las bebidas son buenas, a un precio razonable y el personal es muy amable.",
     rating: 5
   },
   {
-    name: "Elena R.",
-    text: "La comida es tan buena como los cócteles. El tataki de atún se deshace en la boca. Volveré sin duda.",
+    name: "Alex Wenman",
+    text: "Con bebidas increíbles y un espacio súper íntimo, Big in Japan es un lugar genial para tomar cócteles. Nos encantó su estilo clandestino y también que no fue difícil de encontrar. Buen precio, excelente servicio y ambiente relajado.",
     rating: 5
   },
   {
-    name: "James W.",
-    text: "A true gem. The attention to detail is staggering, from the ice cubes to the lighting. A must-visit in Montreal.",
+    name: "Kris Vathsalan",
+    text: "¡Uno de los bares más bonitos en los que he estado! Parecía un bar clandestino, con una puerta difícil de encontrar, pero una vez que entramos, el ambiente era genial y valió la pena. Los cócteles estaban DELICIOSOS y el servicio fue muy puntual.",
+    rating: 5
+  },
+  {
+    name: "Tristan Newton",
+    text: "Una joya escondida increíble en Montreal. Uno de los mejores lugares que hemos visitado, sin duda.",
+    rating: 5
+  },
+  {
+    name: "Vina Nguyen",
+    text: "Bebidas deliciosas a precios razonables y un servicio excelente. Es un espacio precioso una vez que entras y te sientas.",
     rating: 5
   }
 ];
@@ -36,8 +46,16 @@ export default function Testimonials() {
     <section className="py-24 bg-card">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-secondary font-cinzel tracking-widest text-sm">TESTIMONIOS</span>
-          <h2 className="text-3xl md:text-4xl font-cinzel text-white mt-2">Lo que dicen nuestros clientes</h2>
+          <span className="text-secondary font-cinzel tracking-widest text-sm uppercase">Testimonios</span>
+          <h2 className="text-4xl md:text-5xl font-cinzel text-white mt-4 mb-2">What Our Guests Say</h2>
+          <div className="flex items-center justify-center gap-2 mt-4">
+            <div className="flex text-secondary">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={20} fill="currentColor" />
+              ))}
+            </div>
+            <span className="text-gray-400 font-medium">4.8 on Google Reviews</span>
+          </div>
         </div>
 
         <Carousel
@@ -54,26 +72,31 @@ export default function Testimonials() {
         >
           <CarouselContent>
             {reviews.map((review, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-6">
-                <div className="bg-background border border-white/5 p-8 h-full flex flex-col justify-between rounded-sm hover:border-primary/30 transition-colors">
-                  <div className="space-y-4">
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2 pl-6">
+                <div className="bg-background border border-white/5 p-10 h-full flex flex-col justify-between rounded-sm hover:border-primary/30 transition-all duration-300 shadow-xl">
+                  <div className="space-y-6">
                     <div className="flex text-secondary">
                       {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} size={16} fill="currentColor" />
+                        <Star key={i} size={18} fill="currentColor" />
                       ))}
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed italic">"{review.text}"</p>
+                    <p className="text-gray-200 text-lg leading-relaxed italic font-light">
+                      "{review.text}"
+                    </p>
                   </div>
-                  <div className="mt-6 pt-6 border-t border-white/5">
-                    <p className="font-cinzel text-white font-bold">{review.name}</p>
-                    <p className="text-xs text-gray-500">Cliente Verificado</p>
+                  <div className="mt-8 pt-8 border-t border-white/5">
+                    <p className="font-cinzel text-white text-xl font-bold tracking-wider uppercase">
+                      - {review.name}
+                    </p>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex bg-transparent border-white/10 text-white hover:bg-primary hover:border-primary" />
-          <CarouselNext className="hidden md:flex bg-transparent border-white/10 text-white hover:bg-primary hover:border-primary" />
+          <div className="flex justify-center gap-4 mt-12">
+            <CarouselPrevious className="static translate-y-0 bg-transparent border-white/10 text-white hover:bg-primary hover:border-primary w-12 h-12" />
+            <CarouselNext className="static translate-y-0 bg-transparent border-white/10 text-white hover:bg-primary hover:border-primary w-12 h-12" />
+          </div>
         </Carousel>
       </div>
     </section>
