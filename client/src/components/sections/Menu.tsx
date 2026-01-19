@@ -2,6 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
+import menuImg1 from "@assets/Screenshot_20260119-144319_(1)_1768850602849.jpg";
+import menuImg2 from "@assets/Screenshot_20260119-144318_(1)_1768850602928.jpg";
+import menuImg3 from "@assets/Screenshot_20260119-144322_(1)_1768850602974.jpg";
 
 type Category = "bulles" | "blancs" | "rouges" | "bieres" | "sans_alcool" | "premium";
 
@@ -47,13 +50,13 @@ const menuItems: Record<Category, MenuItem[]> = {
   premium: [
     { name: "Bulleit", description: "Bourbon, états-unis", price: "CAD 12.00" },
     { name: "Maker's Mark", description: "Bourbon, états-unis", price: "CAD 13.00" },
-    { name: "Buffalo Trace", description: "Bourbon, états-unis", price: "CAD 12.00" },
+    { name: "Buffalo Trace", description: "Bourbon, estados-unidos", price: "CAD 12.00" },
     { name: "Lot 40", description: "Whiskie, canada", price: "CAD 11.00" },
     { name: "Knob Creek 9", description: "Bourbon, 9 ans, états-unis", price: "CAD 14.00" },
-    { name: "Basil Hayden's", description: "Bourbon, états-unis", price: "CAD 15.00" },
-    { name: "Woodford", description: "Bourbon, états-unis", price: "CAD 14.00" },
+    { name: "Basil Hayden's", description: "Bourbon, estados-unidos", price: "CAD 15.00" },
+    { name: "Woodford", description: "Bourbon, estados-unidos", price: "CAD 14.00" },
     { name: "Pike Creek", description: "Whiskie, canada", price: "CAD 12.00" },
-    { name: "Gibson", description: "Whiskie, états-unis", price: "CAD 11.00" },
+    { name: "Gibson", description: "Whiskie, estados-unidos", price: "CAD 11.00" },
     { name: "Koval", description: "Bourbon, estados-unidos", price: "CAD 16.00" },
   ]
 };
@@ -69,7 +72,7 @@ const categories = [
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<Category>("bulles");
-  const [showPdf, setShowPdf] = useState(false);
+  const [showFullMenu, setShowFullMenu] = useState(false);
 
   return (
     <section id="menu" className="py-24 bg-background relative">
@@ -127,27 +130,30 @@ export default function Menu() {
 
         <div className="text-center mt-20 space-y-8">
           <Button 
-            onClick={() => setShowPdf(!showPdf)}
+            onClick={() => setShowFullMenu(!showFullMenu)}
             variant="outline" 
             className="border-secondary text-secondary hover:bg-secondary hover:text-black font-cinzel tracking-widest gap-2"
           >
             <Eye size={16} />
-            {showPdf ? "OCULTAR CARTA" : "MOSTRAR CARTA COMPLETA PDF"}
+            {showFullMenu ? "OCULTAR CARTA" : "MOSTRAR CARTA COMPLETA"}
           </Button>
 
-          {showPdf && (
+          {showFullMenu && (
             <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="w-full max-w-5xl mx-auto overflow-hidden rounded-lg shadow-2xl border border-white/10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-10"
             >
-              <iframe 
-                src="/attached_assets/carta_bebidas_big_in_japan_completa.pdf" 
-                width="100%" 
-                height="800px"
-                className="bg-white"
-              />
+              {[menuImg1, menuImg2, menuImg3].map((img, index) => (
+                <div key={index} className="relative aspect-[3/4] overflow-hidden rounded-lg border border-white/10 shadow-2xl">
+                  <img 
+                    src={img} 
+                    alt={`Menu Page ${index + 1}`} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ))}
             </motion.div>
           )}
         </div>
