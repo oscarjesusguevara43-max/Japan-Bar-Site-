@@ -73,13 +73,13 @@ export default function Hero() {
       </div>
 
       {/* Floating Call Button */}
-      <motion.button
+      <motion.a
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={makeCall}
-        className="fixed bottom-8 right-8 z-[100] bg-secondary text-black p-4 rounded-full shadow-2xl flex items-center justify-center hover:bg-secondary/90 transition-colors"
+        href="tel:+14383805658"
+        className="fixed bottom-8 right-8 z-[100] bg-secondary text-black p-4 rounded-full shadow-2xl flex items-center justify-center hover:bg-secondary/90 transition-colors cursor-pointer"
         aria-label="Call Now"
       >
         <Phone className="h-7 w-7" />
@@ -87,7 +87,7 @@ export default function Hero() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
           <span className="relative inline-flex rounded-full h-4 w-4 bg-white/20"></span>
         </span>
-      </motion.button>
+      </motion.a>
 
       <motion.div 
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-white/50 cursor-pointer"
