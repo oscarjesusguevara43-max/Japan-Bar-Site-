@@ -15,9 +15,9 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBg})` }}
+          style={{ backgroundImage: `url(${heroBg})`, backgroundPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-background" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">

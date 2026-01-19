@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
-type Category = "cocktails" | "sake" | "wine" | "food";
+type Category = "bulles" | "blancs" | "rouges" | "bieres" | "sans_alcool" | "premium";
 
 interface MenuItem {
   name: string;
@@ -13,64 +13,82 @@ interface MenuItem {
 }
 
 const menuItems: Record<Category, MenuItem[]> = {
-  cocktails: [
-    { name: "Tokyo Old Fashioned", description: "Nikka Whisky From The Barrel, azúcar de Okinawa, amargos de yuzu", price: "$22" },
-    { name: "Sakura Martini", description: "Roku Gin, sake infusionado con flor de cerezo, vermouth seco", price: "$19", tag: "Signature" },
-    { name: "Kyoto Mule", description: "Vodka Haku, jengibre fresco, lima, pepino, soda", price: "$18" },
-    { name: "Matcha Highball", description: "Whisky Toki, sirope de té matcha ceremonial, limón, soda", price: "$17" },
-    { name: "Yuzu Sour", description: "Sake Junmai, licor de yuzu, clara de huevo, limón", price: "$18" },
-    { name: "Smoked Plum Negroni", description: "Mezcal, Campari, Umeshu (vino de ciruela), humo de madera de cerezo", price: "$21" },
+  bulles: [
+    { name: "Cava, Parellada, Sumarroca, Espagne", description: "Culture biologique", price: "CAD 11.00" },
+    { name: "Québec, Pommes, Cidrerie Chemin Des Sept", description: "Turbot Brut, Canada", price: "CAD 40.00" },
+    { name: "Champagne, Pommery Brut Royal, France", description: "Classic selection", price: "CAD 20.00" },
+    { name: "Champagne, Chardonnay, Pascale Doquet", description: "Premier Cru, France", price: "CAD 85.00" },
+    { name: "Champagne, Chardonnay, Jacques Lassaigne", description: "Blanc De Blanc, France", price: "CAD 95.00" },
   ],
-  sake: [
-    { name: "Dassai 45", description: "Junmai Daiginjo - Afrutado, limpio, elegante", price: "$14 / $85" },
-    { name: "Kubota Senju", description: "Ginjo - Seco, crujiente, notas minerales", price: "$12 / $70" },
-    { name: "Hakkaisan", description: "Tokubetsu Junmai - Suave, equilibrado, final limpio", price: "$13 / $75" },
-    { name: "Tozai Snow Maiden", description: "Junmai Nigori - Cremoso, textura rica, notas de melón", price: "$11 / $65" },
+  blancs: [
+    { name: "Macedoine, Assyrtiko/Alagousia, Epanomi", description: "Gerovassiliou, 2022, Grèce", price: "CAD 10.00" },
+    { name: "Alsace, Pinot Blanc/Riesling, Trilogie", description: "Domaine Barmès-Buecher, 2018, France (Biodynamique)", price: "CAD 10.00" },
+    { name: "Alsace, Pinot Blanc, La Mise Du Printemps", description: "Josmeyer, 2023, France (Culture biologique)", price: "CAD 12.00" },
+    { name: "Meseta, Airen/Macabeo, Domaine Les Rassembleurs", description: "L'Orange, 2022 (Culture biologique)", price: "CAD 70.00" },
   ],
-  wine: [
-    { name: "Chablis, Domaine Laroche", description: "Bourgogne, Francia - Chardonnay", price: "$18 / $90" },
-    { name: "Pinot Noir, Erath", description: "Oregon, USA - Frutos rojos, especias suaves", price: "$16 / $80" },
-    { name: "Riesling, Dr. Loosen", description: "Mosel, Alemania - Semi-seco, acidez vibrante", price: "$14 / $70" },
+  rouges: [
+    { name: "Toscana, Grenache/Carignan, Unlitro", description: "Ampeleia, 2022, Italie", price: "CAD 10.00" },
+    { name: "Bourgogne, Pinot Noir, Vieilles Vignes", description: "Nicolas Potel, 2017, France", price: "CAD 12.00" },
+    { name: "Loire, Cabernet Franc, Litron Bourgueil", description: "Nicolas Grosbois, 2021, France (Culture biologique)", price: "CAD 65.00" },
+    { name: "Beaujolais, Gamay, Prémices Laurence Et Rémi", description: "Dufaitre, 2021, France (Culture biologique)", price: "CAD 60.00" },
   ],
-  food: [
-    { name: "Edamame Trufado", description: "Sal marina, aceite de trufa blanca", price: "$9" },
-    { name: "Tataki de Atún", description: "Atún aleta azul, ponzu cítrico, sésamo tostado, microgreens", price: "$24", tag: "Popular" },
-    { name: "Gyoza de Wagyu", description: "Relleno de carne Wagyu, salsa de soja y vinagre negro (5 pz)", price: "$18" },
-    { name: "Karaage", description: "Pollo frito estilo japonés, mayonesa de yuzu kosho", price: "$16" },
-    { name: "Brochetas Yakitori", description: "Selección del chef (3 pz), glaseado tare casero", price: "$15" },
+  bieres: [
+    { name: "Blonde", description: "Cerveza clara artesanal", price: "CAD 8.00" },
+    { name: "Isa Des Chutes", description: "Session IPA", price: "CAD 9.00" },
+    { name: "Noire", description: "Stout artesanal", price: "CAD 9.00" },
+    { name: "Cidre", description: "Sidra artesanal de manzana", price: "CAD 8.50" },
+  ],
+  sans_alcool: [
+    { name: "Jus D'orange", description: "Oranges fraichement pressées", price: "CAD 6.00" },
+    { name: "Virgin Mule", description: "Lime, sirop de gingembre, soda, menthe", price: "CAD 10.00" },
+    { name: "Limonade", description: "Citron, soda, sirop simple", price: "CAD 7.00" },
+    { name: "Diabolo Menthe", description: "Sirop de menthe, citron, soda", price: "CAD 7.00" },
+  ],
+  premium: [
+    { name: "Bulleit", description: "Bourbon, états-unis", price: "CAD 12.00" },
+    { name: "Maker's Mark", description: "Bourbon, états-unis", price: "CAD 13.00" },
+    { name: "Buffalo Trace", description: "Bourbon, états-unis", price: "CAD 12.00" },
+    { name: "Lot 40", description: "Whiskie, canada", price: "CAD 11.00" },
+    { name: "Knob Creek 9", description: "Bourbon, 9 ans, états-unis", price: "CAD 14.00" },
+    { name: "Basil Hayden's", description: "Bourbon, états-unis", price: "CAD 15.00" },
+    { name: "Woodford", description: "Bourbon, états-unis", price: "CAD 14.00" },
+    { name: "Pike Creek", description: "Whiskie, canada", price: "CAD 12.00" },
+    { name: "Gibson", description: "Whiskie, états-unis", price: "CAD 11.00" },
+    { name: "Koval", description: "Bourbon, états-unis", price: "CAD 16.00" },
   ]
 };
 
 const categories = [
-  { id: "cocktails", label: "Cócteles de Autor" },
-  { id: "sake", label: "Sake & Shochu" },
-  { id: "wine", label: "Vinos Selectos" },
-  { id: "food", label: "Izakaya Tapas" },
+  { id: "bulles", label: "Bulles" },
+  { id: "blancs", label: "Blancs" },
+  { id: "rouges", label: "Rouges" },
+  { id: "bieres", label: "Bières" },
+  { id: "sans_alcool", label: "Sans Alcool" },
+  { id: "premium", label: "Premium" },
 ];
 
 export default function Menu() {
-  const [activeCategory, setActiveCategory] = useState<Category>("cocktails");
+  const [activeCategory, setActiveCategory] = useState<Category>("bulles");
 
   return (
     <section id="menu" className="py-24 bg-background relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <span className="text-secondary font-cinzel tracking-widest text-sm">NUESTRA CARTA</span>
-          <h2 className="text-4xl md:text-5xl font-cinzel text-white">Sabores de Oriente</h2>
+          <span className="text-secondary font-cinzel tracking-widest text-sm uppercase">Nuestra Carta</span>
+          <h2 className="text-4xl md:text-5xl font-cinzel text-white">Selección de la Casa</h2>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
 
-        {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-16 border-b border-white/10 pb-1">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id as Category)}
-              className={`pb-4 text-sm md:text-lg font-cinzel tracking-wider transition-all relative ${
+              className={`pb-4 text-xs md:text-base font-cinzel tracking-wider transition-all relative whitespace-nowrap ${
                 activeCategory === cat.id ? "text-secondary" : "text-gray-500 hover:text-gray-300"
               }`}
             >
-              {cat.label}
+              {cat.label.toUpperCase()}
               {activeCategory === cat.id && (
                 <motion.div 
                   layoutId="activeTab"
@@ -81,7 +99,6 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* Content */}
         <div className="min-h-[400px]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -95,17 +112,12 @@ export default function Menu() {
               {menuItems[activeCategory].map((item, idx) => (
                 <div key={idx} className="group relative">
                   <div className="flex justify-between items-baseline border-b border-white/10 pb-2 mb-2 group-hover:border-primary/50 transition-colors">
-                    <h3 className="text-xl text-white font-medium flex items-center gap-3">
+                    <h3 className="text-lg text-white font-medium flex items-center gap-3">
                       {item.name}
-                      {item.tag && (
-                        <span className="text-[10px] uppercase bg-primary/20 text-primary px-2 py-0.5 rounded border border-primary/20 font-bold tracking-wider">
-                          {item.tag}
-                        </span>
-                      )}
                     </h3>
-                    <span className="text-secondary font-cinzel font-bold text-lg">{item.price}</span>
+                    <span className="text-secondary font-cinzel font-bold text-base whitespace-nowrap ml-4">{item.price}</span>
                   </div>
-                  <p className="text-gray-400 text-sm font-light italic">{item.description}</p>
+                  <p className="text-gray-400 text-xs font-light italic">{item.description}</p>
                 </div>
               ))}
             </motion.div>
