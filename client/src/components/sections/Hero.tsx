@@ -1,7 +1,7 @@
 import heroBg from "@assets/Screenshot_20260118-174214_(1)_1768847794315.jpg";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { Phone } from "lucide-react";
 
 export default function Hero() {
   const scrollTo = (id: string) => {
@@ -11,18 +11,20 @@ export default function Hero() {
     }
   };
 
-  const openWhatsApp = () => {
+  const callWhatsApp = () => {
     window.open("https://wa.me/14383805658", "_blank");
   };
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
+      {/* Background with explicit image handling */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBg})`, backgroundPosition: 'center 40%' }}
+        <img 
+          src={heroBg} 
+          alt="Big in Japan Bar Interior"
+          className="w-full h-full object-cover object-[center_40%]"
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
@@ -65,23 +67,25 @@ export default function Hero() {
               VER CARTA
             </Button>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="pt-4"
-          >
-            <Button
-              onClick={openWhatsApp}
-              className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-6 py-6 font-medium shadow-lg transition-transform hover:scale-105"
-            >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              WhatsApp
-            </Button>
-          </motion.div>
         </motion.div>
       </div>
+
+      {/* Floating WhatsApp Call Button */}
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={callWhatsApp}
+        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:bg-[#128C7E] transition-colors"
+        aria-label="Call on WhatsApp"
+      >
+        <Phone className="h-7 w-7" />
+        <span className="absolute -top-2 -right-2 flex h-4 w-4">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-4 w-4 bg-white/20"></span>
+        </span>
+      </motion.button>
 
       <motion.div 
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-white/50 cursor-pointer"
