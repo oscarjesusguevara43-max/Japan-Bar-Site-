@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Eye } from "lucide-react";
 
 type Category = "bulles" | "blancs" | "rouges" | "bieres" | "sans_alcool" | "premium";
 
@@ -54,7 +54,7 @@ const menuItems: Record<Category, MenuItem[]> = {
     { name: "Woodford", description: "Bourbon, états-unis", price: "CAD 14.00" },
     { name: "Pike Creek", description: "Whiskie, canada", price: "CAD 12.00" },
     { name: "Gibson", description: "Whiskie, états-unis", price: "CAD 11.00" },
-    { name: "Koval", description: "Bourbon, états-unis", price: "CAD 16.00" },
+    { name: "Koval", description: "Bourbon, estados-unidos", price: "CAD 16.00" },
   ]
 };
 
@@ -69,6 +69,7 @@ const categories = [
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<Category>("bulles");
+  const [showPdf, setShowPdf] = useState(false);
 
   return (
     <section id="menu" className="py-24 bg-background relative">
@@ -124,14 +125,31 @@ export default function Menu() {
           </AnimatePresence>
         </div>
 
-        <div className="text-center mt-20">
+        <div className="text-center mt-20 space-y-8">
           <Button 
+            onClick={() => setShowPdf(!showPdf)}
             variant="outline" 
             className="border-secondary text-secondary hover:bg-secondary hover:text-black font-cinzel tracking-widest gap-2"
           >
-            <Download size={16} />
-            DESCARGAR CARTA COMPLETA (PDF)
+            <Eye size={16} />
+            {showPdf ? "OCULTAR CARTA" : "MOSTRAR CARTA COMPLETA PDF"}
           </Button>
+
+          {showPdf && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="w-full max-w-5xl mx-auto overflow-hidden rounded-lg shadow-2xl border border-white/10"
+            >
+              <iframe 
+                src="/attached_assets/carta_bebidas_big_in_japan_completa.pdf" 
+                width="100%" 
+                height="800px"
+                className="bg-white"
+              />
+            </motion.div>
+          )}
         </div>
       </div>
     </section>
