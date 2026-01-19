@@ -1,6 +1,6 @@
+import heroBg from "@assets/Screenshot_20260118-174137_(1)_1768846865914.jpg";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import heroBg from "@assets/generated_images/moody_high-end_bar_interior.png";
 
 export default function Hero() {
   const scrollTo = (id: string) => {
@@ -9,7 +9,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
-      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -18,7 +17,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -60,7 +58,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div 
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-white/50"
         animate={{ y: [0, 10, 0] }}

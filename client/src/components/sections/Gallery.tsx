@@ -1,18 +1,20 @@
+import gallery1 from "@assets/Screenshot_20260118-174205_(1)_1768846866191.jpg";
+import gallery2 from "@assets/Screenshot_20260118-174208_(1)_1768846866234.jpg";
+import gallery3 from "@assets/Screenshot_20260118-174212_(1)_1768846866325.jpg";
+import gallery4 from "@assets/Screenshot_20260118-174223_(1)_1768846866360.jpg";
+import gallery5 from "@assets/Screenshot_20260118-174157_(1)_1768846866079.jpg";
+import gallery6 from "@assets/Screenshot_20260118-174159_(1)_1768846866043.jpg";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
-import gallery1 from "@assets/generated_images/signature_red_cocktail.png";
-import gallery2 from "@assets/generated_images/japanese_bar_details.png";
-import gallery3 from "@assets/generated_images/moody_high-end_bar_interior.png";
 
 const images = [
-  { src: gallery1, alt: "Signature Cocktail", span: "md:col-span-1 md:row-span-2" },
-  { src: gallery2, alt: "Interior Details", span: "md:col-span-1 md:row-span-1" },
-  { src: gallery3, alt: "Bar Atmosphere", span: "md:col-span-2 md:row-span-1" },
-  // Reusing images for layout demo purposes
-  { src: gallery2, alt: "More Details", span: "md:col-span-1 md:row-span-1" },
-  { src: gallery1, alt: "Another Cocktail", span: "md:col-span-1 md:row-span-1" },
-  { src: gallery3, alt: "Night Vibe", span: "md:col-span-1 md:row-span-1" },
+  { src: gallery1, alt: "Signature Cocktails", span: "md:col-span-1 md:row-span-2" },
+  { src: gallery2, alt: "The Art of Mixology", span: "md:col-span-1 md:row-span-1" },
+  { src: gallery3, alt: "Bar Counter Vibe", span: "md:col-span-2 md:row-span-1" },
+  { src: gallery4, alt: "Japanese Tapas", span: "md:col-span-1 md:row-span-1" },
+  { src: gallery5, alt: "Craftsmanship", span: "md:col-span-1 md:row-span-1" },
+  { src: gallery6, alt: "Atmosphere", span: "md:col-span-1 md:row-span-1" },
 ];
 
 export default function Gallery() {
@@ -53,7 +55,6 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Lightbox */}
       {selectedImage && (
         <div className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4">
           <button 
@@ -67,7 +68,7 @@ export default function Gallery() {
             animate={{ opacity: 1, scale: 1 }}
             src={selectedImage}
             alt="Fullscreen view"
-            className="max-w-full max-h-[90vh] object-contain border border-white/10 box-shadow-2xl"
+            className="max-w-full max-h-[90vh] object-contain border border-white/10 shadow-2xl"
           />
         </div>
       )}

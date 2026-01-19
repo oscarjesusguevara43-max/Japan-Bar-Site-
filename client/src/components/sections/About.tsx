@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import aboutImg from "@assets/Screenshot_20260118-174147_(1)_1768846865967.jpg";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import bartenderImg from "@assets/generated_images/japanese_bartender_mixing_drink.png";
 
 export default function About() {
   const ref = useRef(null);
@@ -15,12 +14,10 @@ export default function About() {
 
   return (
     <section id="about" className="py-24 bg-background relative overflow-hidden">
-      {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6">
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -58,7 +55,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -68,15 +64,13 @@ export default function About() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-white/10 group">
               <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10" />
               <img 
-                src={bartenderImg} 
-                alt="Bartender mixing drink" 
+                src={aboutImg} 
+                alt="Big in Japan Interior" 
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
-              {/* Frame decoration */}
               <div className="absolute inset-4 border border-white/20 z-20" />
             </div>
             
-            {/* Quote card */}
             <div className="absolute -bottom-10 -left-10 bg-card border border-white/10 p-6 md:p-8 max-w-xs shadow-2xl hidden md:block z-30">
               <p className="font-cinzel text-primary text-xl mb-4">"</p>
               <p className="text-gray-300 italic font-light text-sm">
