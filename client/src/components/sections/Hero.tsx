@@ -2,8 +2,11 @@ import heroBg from "@assets/Screenshot_20260118-174214_(1)_1768847794315.jpg";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+  
   const scrollTo = (id: string) => {
     const element = document.querySelector(id);
     if (element) {
@@ -11,8 +14,8 @@ export default function Hero() {
     }
   };
 
-  const callWhatsApp = () => {
-    window.open("https://wa.me/14383805658", "_blank");
+  const makeCall = () => {
+    window.location.href = "tel:+14383805658";
   };
 
   return (
@@ -43,8 +46,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-lg md:text-2xl text-gray-200 font-light max-w-2xl mx-auto leading-relaxed">
-            Un rincón secreto en el corazón de Montréal. <br className="hidden md:block" />
-            Cócteles artesanales, atmósfera íntima, alma japonesa.
+            {t("hero.subtitle")}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
@@ -54,7 +56,7 @@ export default function Hero() {
               onClick={() => scrollTo("#reservations")}
               data-testid="button-reservar-hero"
             >
-              RESERVAR MESA
+              {t("hero.reserve")}
             </Button>
             
             <Button 
@@ -64,21 +66,21 @@ export default function Hero() {
               onClick={() => scrollTo("#menu")}
               data-testid="button-carta-hero"
             >
-              VER CARTA
+              {t("hero.menu")}
             </Button>
           </div>
         </motion.div>
       </div>
 
-      {/* Floating WhatsApp Call Button */}
+      {/* Floating Call Button */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={callWhatsApp}
-        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:bg-[#128C7E] transition-colors"
-        aria-label="Call on WhatsApp"
+        onClick={makeCall}
+        className="fixed bottom-8 right-8 z-[100] bg-secondary text-black p-4 rounded-full shadow-2xl flex items-center justify-center hover:bg-secondary/90 transition-colors"
+        aria-label="Call Now"
       >
         <Phone className="h-7 w-7" />
         <span className="absolute -top-2 -right-2 flex h-4 w-4">
@@ -93,7 +95,7 @@ export default function Hero() {
         transition={{ duration: 1.5, repeat: Infinity }}
         onClick={() => scrollTo("#about")}
       >
-        <span className="text-xs uppercase tracking-widest">Descubre</span>
+        <span className="text-xs uppercase tracking-widest">{t("hero.discover")}</span>
       </motion.div>
     </section>
   );

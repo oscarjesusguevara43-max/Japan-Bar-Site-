@@ -1,15 +1,17 @@
 import aboutImg from "@assets/Screenshot_20260118-174147_(1)_1768846865967.jpg";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   const stats = [
-    { label: "Años de Historia", value: "10+" },
-    { label: "Cócteles Creados", value: "100+" },
-    { label: "Clientes Felices", value: "5k+" },
+    { label: t("about.years"), value: "10+" },
+    { label: t("about.cocktails"), value: "100+" },
+    { label: t("about.clients"), value: "5k+" },
   ];
 
   return (
@@ -25,20 +27,18 @@ export default function About() {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <span className="text-secondary font-cinzel tracking-widest">NUESTRA HISTORIA</span>
+              <span className="text-secondary font-cinzel tracking-widest">{t("about.tag")}</span>
               <h2 className="text-4xl md:text-5xl font-cinzel text-white leading-tight">
-                El Arte de la <br /> <span className="text-primary italic">Hospitalidad Invisible</span>
+                {t("about.title")} <br /> <span className="text-primary italic">{t("about.invisible")}</span>
               </h2>
             </div>
 
             <p className="text-gray-300 leading-relaxed text-lg">
-              Escondido detrás de una puerta sin nombre en el Boulevard Saint-Laurent, Big in Japan no es solo un bar, es un santuario. 
-              Desde 2015, hemos cultivado un espacio donde el tiempo se detiene y cada detalle importa.
+              {t("about.text1")}
             </p>
 
             <p className="text-gray-400 leading-relaxed">
-              Nuestra filosofía combina la precisión técnica de la coctelería japonesa con la calidez del alma de Montreal. 
-              Cada bebida es una ceremonia, cada visita una experiencia íntima diseñada para los sentidos.
+              {t("about.text2")}
             </p>
 
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
@@ -74,9 +74,9 @@ export default function About() {
             <div className="absolute -bottom-10 -left-10 bg-card border border-white/10 p-6 md:p-8 max-w-xs shadow-2xl hidden md:block z-30">
               <p className="font-cinzel text-primary text-xl mb-4">"</p>
               <p className="text-gray-300 italic font-light text-sm">
-                El verdadero cóctel no se bebe, se siente. Es una pausa en el caos del mundo.
+                {t("about.quote")}
               </p>
-              <p className="text-secondary text-xs mt-4 font-bold tracking-widest uppercase">— Hiroshi, Jefe de Barra</p>
+              <p className="text-secondary text-xs mt-4 font-bold tracking-widest uppercase">— {t("about.author")}</p>
             </div>
           </motion.div>
         </div>

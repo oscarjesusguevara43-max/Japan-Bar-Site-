@@ -3,10 +3,13 @@ import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/LanguageContext";
+import { Globe } from "lucide-react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,14 +20,13 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Inicio", href: "#hero" },
-    { name: "Historia", href: "#about" },
-    { name: "Carta", href: "#menu" },
-    { name: "Galería", href: "#gallery" },
-    { name: "Reservas", href: "#reservations" },
+    { name: t("nav.history"), href: "#about" },
+    { name: t("nav.menu"), href: "#menu" },
+    { name: t("nav.gallery"), href: "#gallery" },
+    { name: t("nav.reservations"), href: "#reservations" },
   ];
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     const element = document.querySelector(id);
@@ -56,21 +58,38 @@ export default function Navbar() {
               {link.name.toUpperCase()}
             </a>
           ))}
+          
+          <button 
+            onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+            className="flex items-center gap-1 text-xs font-cinzel text-secondary hover:text-white transition-colors border-l border-white/10 pl-4"
+          >
+            <Globe size={14} />
+            {language === "en" ? "FR" : "EN"}
+          </button>
+
           <Button 
             className="bg-primary hover:bg-primary/90 text-white font-cinzel text-xs tracking-widest px-6"
             onClick={(e) => scrollToSection(e as any, "#reservations")}
           >
-            RESERVAR
+            {t("hero.reserve")}
           </Button>
         </div>
 
         {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+          <button 
+            onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+            className="text-secondary"
+          >
+            <Globe size={20} />
+          </button>
+          <button
+            className="text-white"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -97,7 +116,7 @@ export default function Navbar() {
                 className="bg-primary hover:bg-primary/90 text-white w-full mt-4"
                 onClick={(e) => scrollToSection(e as any, "#reservations")}
               >
-                RESERVAR MESA
+                {t("hero.reserve")}
               </Button>
             </div>
           </motion.div>

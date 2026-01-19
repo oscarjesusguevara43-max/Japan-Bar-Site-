@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 import menuImg1 from "@assets/Screenshot_20260119-144319_(1)_1768850602849.jpg";
 import menuImg2 from "@assets/Screenshot_20260119-144318_(1)_1768850602928.jpg";
 import menuImg3 from "@assets/Screenshot_20260119-144322_(1)_1768850602974.jpg";
@@ -73,13 +74,14 @@ const categories = [
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<Category>("bulles");
   const [showFullMenu, setShowFullMenu] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <section id="menu" className="py-24 bg-background relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <span className="text-secondary font-cinzel tracking-widest text-sm uppercase">Nuestra Carta</span>
-          <h2 className="text-4xl md:text-5xl font-cinzel text-white">Selección de la Casa</h2>
+          <span className="text-secondary font-cinzel tracking-widest text-sm uppercase">{t("menu.title")}</span>
+          <h2 className="text-4xl md:text-5xl font-cinzel text-white">{t("menu.subtitle")}</h2>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
 
@@ -135,7 +137,7 @@ export default function Menu() {
             className="border-secondary text-secondary hover:bg-secondary hover:text-black font-cinzel tracking-widest gap-2"
           >
             <Eye size={16} />
-            {showFullMenu ? "OCULTAR CARTA" : "MOSTRAR CARTA COMPLETA"}
+            {showFullMenu ? t("menu.hideFull") : t("menu.showFull")}
           </Button>
 
           {showFullMenu && (
